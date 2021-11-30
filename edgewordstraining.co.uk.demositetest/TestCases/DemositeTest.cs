@@ -20,7 +20,7 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
         [TearDown]
         public void TearDown()
         {
-            //driver.Quit();
+            driver.Quit();
         }
 
         [Test]
@@ -31,6 +31,10 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             driver.FindElement(By.Id("username")).SendKeys("imanneupane@yahoo.com");
             driver.FindElement(By.Id("password")).SendKeys("Neupane@12345");
             driver.FindElement(By.CssSelector("button[name='login']")).Click();
+            System.Console.WriteLine("You are now Logged in!");
+            Assert.Pass("Successfully logged in");
         }
+
+
     }
 }
