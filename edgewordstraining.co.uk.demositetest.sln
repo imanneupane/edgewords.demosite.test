@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "edgewordstraining.co.uk.demositetest", "edgewordstraining.co.uk.demositetest\edgewordstraining.co.uk.demositetest.csproj", "{EC800D1C-8B37-4F99-8893-5DB7CE3FEDD2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC800D1C-8B37-4F99-8893-5DB7CE3FEDD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC800D1C-8B37-4F99-8893-5DB7CE3FEDD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC800D1C-8B37-4F99-8893-5DB7CE3FEDD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC800D1C-8B37-4F99-8893-5DB7CE3FEDD2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {64A3075B-5BFF-4B43-8545-9E5912FA0E7A}
+	EndGlobalSection
+EndGlobal
