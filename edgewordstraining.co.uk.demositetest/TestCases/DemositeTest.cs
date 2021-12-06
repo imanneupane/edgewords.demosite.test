@@ -28,6 +28,8 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
         public void LoginTest()
         {
             driver.Url = baseUrl;
+
+            //Login to your account
             driver.FindElement(By.LinkText("My account")).Click();
             driver.FindElement(By.Id("username")).SendKeys("imanneupane@yahoo.com");
             driver.FindElement(By.Id("password")).SendKeys("Neupane@12345");
@@ -35,10 +37,16 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             System.Console.WriteLine("You are now Logged in!");
             //Assert.Pass("Successfully logged in");
 
+            //Add a item to your cart
             driver.FindElement(By.LinkText("Shop")).Click();
             driver.FindElement(By.XPath("//main[@id='main']/ul//a[@href='https://www.edgewordstraining.co.uk/demo-site/product/polo/']/img")).Click();
             driver.FindElement(By.Name("add-to-cart")).Click();
             
+            //view cart and apply coupon
+            driver.FindElement(By.LinkText("View cart")).Click();
+            driver.FindElement(By.Id("coupon_code")).SendKeys("edgewords");
+            driver.FindElement(By.Name("apply_coupon")).Click();
+
         }
 
     }
