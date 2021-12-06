@@ -4,26 +4,13 @@ using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace edgewordstraining.co.uk.demositetest.TestCases
 {
-    public class Tests
+    public class Tests : Utils.BaseClass
     {
-        IWebDriver driver;
-        string baseUrl = "https://www.edgewordstraining.co.uk/demo-site/";
-
-        [SetUp]
-        public void Setup()
-        {
-            driver = new ChromeDriver();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            //driver.Quit();
-        }
-
+        
         [Test]
         public void LoginTest()
         {
@@ -33,7 +20,10 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             driver.FindElement(By.LinkText("My account")).Click();
             driver.FindElement(By.Id("username")).SendKeys("imanneupane@yahoo.com");
             driver.FindElement(By.Id("password")).SendKeys("Neupane@12345");
-            driver.FindElement(By.CssSelector("button[name='login']")).Click();
+
+            WebDriverWait wait = new WebDriverWait(driver, System.TimeSpan.FromSeconds(10));
+            wait.Until(drv => drv.FindElement(By.Name("login")).Displayed);
+            driver.FindElement(By.Name("login")).Click();
             System.Console.WriteLine("You are now Logged in!");
             //Assert.Pass("Successfully logged in");
 
