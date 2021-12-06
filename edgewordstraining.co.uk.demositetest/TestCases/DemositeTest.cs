@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using static edgewordstraining.co.uk.demositetest.Utils.Helpers;
 
 namespace edgewordstraining.co.uk.demositetest.TestCases
 {
@@ -12,7 +13,7 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
     {
         
         [Test]
-        public void LoginTest()
+        public void DemoTest()
         {
             driver.Url = baseUrl;
 
@@ -20,14 +21,14 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             driver.FindElement(By.LinkText("My account")).Click();
             driver.FindElement(By.Id("username")).SendKeys("imanneupane@yahoo.com");
             driver.FindElement(By.Id("password")).SendKeys("Neupane@12345");
-
-            WebDriverWait wait = new WebDriverWait(driver, System.TimeSpan.FromSeconds(10));
-            wait.Until(drv => drv.FindElement(By.Name("login")).Displayed);
+            //WebDriverWait wait = new WebDriverWait(driver, System.TimeSpan.FromSeconds(10));
+            //wait.Until(drv => drv.FindElement(By.Name("login")).Displayed);
+            WaitHelper(driver, 10, By.Name("login"));
             driver.FindElement(By.Name("login")).Click();
             System.Console.WriteLine("You are now Logged in!");
-            //Assert.Pass("Successfully logged in");
 
             //Add a item to your cart
+            WaitHelper(driver, 10, By.LinkText("Shop"));
             driver.FindElement(By.LinkText("Shop")).Click();
             driver.FindElement(By.XPath("//main[@id='main']/ul//a[@href='https://www.edgewordstraining.co.uk/demo-site/product/polo/']/img")).Click();
             driver.FindElement(By.Name("add-to-cart")).Click();
@@ -35,6 +36,7 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             //view cart and apply coupon
             driver.FindElement(By.LinkText("View cart")).Click();
             driver.FindElement(By.Id("coupon_code")).SendKeys("edgewords");
+            WaitHelper(driver, 10, By.Name("apply_coupon"));
             driver.FindElement(By.Name("apply_coupon")).Click();
 
         }

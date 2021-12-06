@@ -90,7 +90,6 @@ C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewords
 C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewordstraining.co.uk.demositetest\bin\Debug\net6.0\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewordstraining.co.uk.demositetest\bin\Debug\net6.0\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewordstraining.co.uk.demositetest\bin\Debug\net6.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewordstraining.co.uk.demositetest\obj\Debug\net6.0\edgewordstraining.co.uk.demositetest.csproj.AssemblyReference.cache
 C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewordstraining.co.uk.demositetest\obj\Debug\net6.0\edgewordstraining.co.uk.demositetest.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewordstraining.co.uk.demositetest\obj\Debug\net6.0\edgewordstraining.co.uk.demositetest.AssemblyInfoInputs.cache
 C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewordstraining.co.uk.demositetest\obj\Debug\net6.0\edgewordstraining.co.uk.demositetest.AssemblyInfo.cs
