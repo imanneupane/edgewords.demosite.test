@@ -99,3 +99,4 @@ C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewords
 C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewordstraining.co.uk.demositetest\obj\Debug\net6.0\ref\edgewordstraining.co.uk.demositetest.dll
 C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewordstraining.co.uk.demositetest\obj\Debug\net6.0\edgewordstraining.co.uk.demositetest.pdb
 C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewordstraining.co.uk.demositetest\obj\Debug\net6.0\edgewordstraining.co.uk.demositetest.genruntimeconfig.cache
+C:\Users\ImanNeupane\source\repos\edgewordstraining.co.uk.demositetest\edgewordstraining.co.uk.demositetest\obj\Debug\net6.0\edgewordstraining.co.uk.demositetest.csproj.AssemblyReference.cache

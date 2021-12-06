@@ -23,6 +23,19 @@ namespace edgewordstraining.co.uk.demositetest.Utils
             myalert.Accept();
         }
 
+        public static void TakeScreenShot(IWebDriver driver, string Filename)
+        {
+            ITakesScreenshot ssdriver = driver as ITakesScreenshot;
+            Screenshot screenshot = ssdriver.GetScreenshot();
+            screenshot.SaveAsFile(@"C:\Users\ImanNeupane\Documents\Screenshot" + Filename + ".png", ScreenshotImageFormat.Png);
+        }
 
+        public static void TakeScreenShotElement(IWebDriver driver, string Filename, By locator)
+        {
+            IWebElement myElm = driver.FindElement(locator);
+            ITakesScreenshot ssdriver = myElm as ITakesScreenshot;
+            Screenshot screenshot = ssdriver.GetScreenshot();
+            screenshot.SaveAsFile(@"C:\Users\ImanNeupane\Documents\Screenshot" + Filename + ".png", ScreenshotImageFormat.Png);
+        }
     }
 }

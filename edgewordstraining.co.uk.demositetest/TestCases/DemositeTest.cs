@@ -21,6 +21,8 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             driver.FindElement(By.LinkText("My account")).Click();
             driver.FindElement(By.Id("username")).SendKeys("imanneupane@yahoo.com");
             driver.FindElement(By.Id("password")).SendKeys("Neupane@12345");
+            //Screenshot form
+            TakeScreenShotElement(driver, "login form", By.Id("post-7"));
             //WebDriverWait wait = new WebDriverWait(driver, System.TimeSpan.FromSeconds(10));
             //wait.Until(drv => drv.FindElement(By.Name("login")).Displayed);
             WaitHelper(driver, 10, By.Name("login"));
@@ -38,6 +40,7 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             driver.FindElement(By.Id("coupon_code")).SendKeys("edgewords");
             WaitHelper(driver, 10, By.Name("apply_coupon"));
             driver.FindElement(By.Name("apply_coupon")).Click();
+            TakeScreenShot(driver, "couponapplied");
 
         }
 
