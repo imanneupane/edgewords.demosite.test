@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Interactions;
 
 namespace edgewordstraining.co.uk.demositetest.TestCases
 {
@@ -20,7 +21,7 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
         [TearDown]
         public void TearDown()
         {
-            driver.Quit();
+            //driver.Quit();
         }
 
         [Test]
@@ -32,9 +33,13 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             driver.FindElement(By.Id("password")).SendKeys("Neupane@12345");
             driver.FindElement(By.CssSelector("button[name='login']")).Click();
             System.Console.WriteLine("You are now Logged in!");
-            Assert.Pass("Successfully logged in");
-        }
+            //Assert.Pass("Successfully logged in");
 
+            driver.FindElement(By.LinkText("Shop")).Click();
+            driver.FindElement(By.XPath("//main[@id='main']/ul//a[@href='https://www.edgewordstraining.co.uk/demo-site/product/polo/']/img")).Click();
+            driver.FindElement(By.Name("add-to-cart")).Click();
+            
+        }
 
     }
 }
