@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace edgewordstraining.co.uk.demositetest.Utils
         public void Setup()
         {
             driver = new ChromeDriver();
+            //driver = new EdgeDriver();
           
         }
 

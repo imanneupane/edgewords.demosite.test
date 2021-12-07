@@ -389,6 +389,18 @@
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
         }
       },
+      "Selenium.WebDriver.IEDriver/4.0.0": {
+        "type": "package",
+        "build": {
+          "build/Selenium.WebDriver.IEDriver.targets": {}
+        }
+      },
+      "Selenium.WebDriver.MSEdgeDriver/96.0.1054.26": {
+        "type": "package",
+        "build": {
+          "build/Selenium.WebDriver.MSEdgeDriver.targets": {}
+        }
+      },
       "System.Reflection.Metadata/1.6.0": {
         "type": "package",
         "compile": {
@@ -1345,6 +1357,37 @@
         "selenium.webdriver.chromedriver.nuspec"
       ]
     },
+    "Selenium.WebDriver.IEDriver/4.0.0": {
+      "sha512": "2mACefO/tqNlPB2UDXUcmf2xqqaxeXhi8kBEoG4m9jUWGKAvC0f+t4t2QyoY5RcKptshpBNeVgD+XR2ttItkPA==",
+      "type": "package",
+      "path": "selenium.webdriver.iedriver/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/DefinePropertiesIEDriver.targets",
+        "build/Selenium.WebDriver.IEDriver.targets",
+        "driver/IEDriverServer.exe",
+        "nupkg-icon.png",
+        "selenium.webdriver.iedriver.4.0.0.nupkg.sha512",
+        "selenium.webdriver.iedriver.nuspec"
+      ]
+    },
+    "Selenium.WebDriver.MSEdgeDriver/96.0.1054.26": {
+      "sha512": "ZQF+U+iyfi+bpleHtcghHf4okajspR28EI7kMG5vgEg4jfYZUhtvRSL9fdBDAHoL8UFqs3a8ZHDMAADCpFdCCg==",
+      "type": "package",
+      "path": "selenium.webdriver.msedgedriver/96.0.1054.26",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Selenium.WebDriver.MSEdgeDriver.targets",
+        "driver/mac64/msedgedriver",
+        "driver/win32/msedgedriver.exe",
+        "driver/win64/msedgedriver.exe",
+        "license/license.txt",
+        "selenium.webdriver.msedgedriver.96.0.1054.26.nupkg.sha512",
+        "selenium.webdriver.msedgedriver.nuspec"
+      ]
+    },
     "System.Reflection.Metadata/1.6.0": {
       "sha512": "COC1aiAJjCoA5GBF+QKL2uLqEBew4JsCkQmoHKbN3TlOZKa2fKLz5CpiRQKDz0RsAOEGsVKqOD5bomsXq/4STQ==",
       "type": "package",
@@ -1376,6 +1419,8 @@
       "Selenium.Support >= 4.1.0",
       "Selenium.WebDriver >= 4.1.0",
       "Selenium.WebDriver.ChromeDriver >= 96.0.4664.4500",
+      "Selenium.WebDriver.IEDriver >= 4.0.0",
+      "Selenium.WebDriver.MSEdgeDriver >= 96.0.1054.26",
       "coverlet.collector >= 3.1.0"
     ]
   },
@@ -1445,6 +1490,14 @@
           "Selenium.WebDriver.ChromeDriver": {
             "target": "Package",
             "version": "[96.0.4664.4500, )"
+          },
+          "Selenium.WebDriver.IEDriver": {
+            "target": "Package",
+            "version": "[4.0.0, )"
+          },
+          "Selenium.WebDriver.MSEdgeDriver": {
+            "target": "Package",
+            "version": "[96.0.1054.26, )"
           },
           "coverlet.collector": {
             "target": "Package",

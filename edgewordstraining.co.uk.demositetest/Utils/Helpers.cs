@@ -35,7 +35,7 @@ namespace edgewordstraining.co.uk.demositetest.Utils
             IWebElement myElm = driver.FindElement(locator);
             ITakesScreenshot ssdriver = myElm as ITakesScreenshot;
             Screenshot screenshot = ssdriver.GetScreenshot();
-            screenshot.SaveAsFile(@"C:\Users\ImanNeupane\Documents\Screenshot" + Filename + ".png", ScreenshotImageFormat.Png);
+            screenshot.SaveAsFile(@"C:\Users\ImanNeupane\Documents\Screenshot\" + Filename + ".png", ScreenshotImageFormat.Png);
         }
     }
 }
