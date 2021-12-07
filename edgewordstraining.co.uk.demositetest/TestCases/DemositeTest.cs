@@ -15,34 +15,33 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
     public class Tests : Utils.BaseClass
     {
         
-        [Test]
+        [Test, Order(1)]
         public void DemoTest()
         {
             driver.Url = baseUrl;
             //Go to login page
             HomePage_POM home = new HomePage_POM(driver);
             home.Login();
+
             //Login to your account
             LoginPage_POM login = new LoginPage_POM(driver);
             WaitHelper(driver, 10, By.Name("login"));
-            login.LoginExpected("imanneupane@yahoo.com","Neupane@12345");
+            login.LoginExpected("imanneupane@yahoo.com", "Neupane@12345");
             //Screenshot form
             TakeScreenShotElement(driver, "login form", By.Id("post-7"));
             System.Console.WriteLine("You are now Logged in!");
 
             //Add a item to your cart
-            WaitHelper(driver, 10, By.LinkText("Shop"));
-            driver.FindElement(By.LinkText("Shop")).Click();
-            driver.FindElement(By.XPath("//main[@id='main']/ul//a[@href='https://www.edgewordstraining.co.uk/demo-site/product/polo/']/img")).Click();
-            driver.FindElement(By.Name("add-to-cart")).Click();
-            
+            AddItem_POM additem = new AddItem_POM(driver);
+            additem.GoToShop().SelectProduct().AddItem();
+            //additem.AddItemToCart();
+      
             //view cart and apply coupon
-            driver.FindElement(By.LinkText("View cart")).Click();
-            driver.FindElement(By.Id("coupon_code")).SendKeys("edgewords");
-            driver.FindElement(By.Name("apply_coupon")).Click();
+            ApplyCoupon_POM applycoupon = new ApplyCoupon_POM(driver);
+            applycoupon.ViewCart();
+            applycoupon.CouponCode("edgewords");
+            applycoupon.ApplyCouponButton();
             TakeScreenShot(driver, "couponapplied");
-
-           
             
             //Check that the coupon takes off 15%
             string subtotal = driver.FindElement(By.XPath("/html//article[@id='post-5']/div[@class='entry-content']/div[@class='woocommerce']//table[@class='shop_table shop_table_responsive']//tr[@class='cart-subtotal']/td/span")).Text;
@@ -50,12 +49,23 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             decimal discount = (15m/100m) * priceBeforeDiscount;
 
             IJavaScriptExecutor scroll = (IJavaScriptExecutor)driver;
-            scroll.ExecuteScript("window.scrollTo(0,8)");
+            _ = scroll.ExecuteScript("window.scrollTo(0,8)");
 
             //Thread.Sleep(1000);
             WaitHelper(driver, 20, By.CssSelector(".cart-discount.coupon-edgewords > td > .amount.woocommerce-Price-amount"));
             string couponDiscount = driver.FindElement(By.CssSelector(".cart-discount.coupon-edgewords > td > .amount.woocommerce-Price-amount")).Text;
-            //Assert.That(discount.ToString("0.00"), Is.EqualTo(couponDiscount.Remove(0,1)), "They are not equal");
+            
+            /*
+            try
+            {
+                Assert.That(discount.ToString("0.00"), Is.EqualTo(couponDiscount.Remove(0, 1)), "They are not equal");
+            }
+            catch (AssertionException)
+            {
+                TakeScreenShotElement(driver, "CouponDiscount", By.ClassName("cart_totals"));
+                throw;
+            }
+            */
 
             if (discount.ToString("0.00").Equals(couponDiscount.Remove(0,1)))
             {
@@ -66,6 +76,7 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
                 Console.WriteLine("Coupon does not take 15% off");
                 TakeScreenShotElement(driver, "CouponDiscount", By.ClassName("cart_totals"));
             }
+            
 
             //Check that the total calculated is correct
             decimal priceAfterDiscount = priceBeforeDiscount - discount;
@@ -85,10 +96,18 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             }
 
             //proceed to checkout and completing billing details
-            driver.FindElement(By.PartialLinkText("Proceed to checkout")).Click();
+            //driver.FindElement(By.PartialLinkText("Proceed to checkout")).Click();
             //driver.FindElement(By.Id("")).SendKeys("");
-
+            
             System.Console.WriteLine("Result: " + shipping);
+            
+        }
+
+        [Test, Order(2)]
+        public void AddItemTest()
+        {
+            driver.Url = baseUrl;
+           
         }
 
     }
