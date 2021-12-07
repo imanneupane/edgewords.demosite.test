@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support;
@@ -6,8 +8,7 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using static edgewordstraining.co.uk.demositetest.Utils.Helpers;
-using System;
-using System.Threading;
+using edgewordstraining.co.uk.demositetest.POM_Pages;
 
 namespace edgewordstraining.co.uk.demositetest.TestCases
 {
@@ -18,18 +19,15 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
         public void DemoTest()
         {
             driver.Url = baseUrl;
-
-            driver.FindElement(By.LinkText("Dismiss")).Click();
+            //Go to login page
+            HomePage_POM home = new HomePage_POM(driver);
+            home.Login();
             //Login to your account
-            driver.FindElement(By.LinkText("My account")).Click();
-            driver.FindElement(By.Id("username")).SendKeys("imanneupane@yahoo.com");
-            driver.FindElement(By.Id("password")).SendKeys("Neupane@12345");
+            LoginPage_POM login = new LoginPage_POM(driver);
+            WaitHelper(driver, 10, By.Name("login"));
+            login.LoginExpected("imanneupane@yahoo.com","Neupane@12345");
             //Screenshot form
             TakeScreenShotElement(driver, "login form", By.Id("post-7"));
-            //WebDriverWait wait = new WebDriverWait(driver, System.TimeSpan.FromSeconds(10));
-            //wait.Until(drv => drv.FindElement(By.Name("login")).Displayed);
-            WaitHelper(driver, 10, By.Name("login"));
-            driver.FindElement(By.Name("login")).Click();
             System.Console.WriteLine("You are now Logged in!");
 
             //Add a item to your cart
@@ -88,7 +86,7 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
 
             //proceed to checkout and completing billing details
             driver.FindElement(By.PartialLinkText("Proceed to checkout")).Click();
-            driver.FindElement(By.Id("")).SendKeys("");
+            //driver.FindElement(By.Id("")).SendKeys("");
 
             System.Console.WriteLine("Result: " + shipping);
         }
