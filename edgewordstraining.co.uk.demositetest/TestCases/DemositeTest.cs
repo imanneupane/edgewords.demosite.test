@@ -55,7 +55,6 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             WaitHelper(driver, 20, By.CssSelector(".cart-discount.coupon-edgewords > td > .amount.woocommerce-Price-amount"));
             string couponDiscount = driver.FindElement(By.CssSelector(".cart-discount.coupon-edgewords > td > .amount.woocommerce-Price-amount")).Text;
             
-            /*
             try
             {
                 Assert.That(discount.ToString("0.00"), Is.EqualTo(couponDiscount.Remove(0, 1)), "They are not equal");
@@ -63,10 +62,10 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             catch (AssertionException)
             {
                 TakeScreenShotElement(driver, "CouponDiscount", By.ClassName("cart_totals"));
-                throw;
+                Console.WriteLine("Coupon does not take 15% off");
             }
-            */
-
+            
+            /*
             if (discount.ToString("0.00").Equals(couponDiscount.Remove(0,1)))
             {
                 Console.WriteLine("Coupon takes 15% off");
@@ -76,7 +75,7 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
                 Console.WriteLine("Coupon does not take 15% off");
                 TakeScreenShotElement(driver, "CouponDiscount", By.ClassName("cart_totals"));
             }
-            
+            */
 
             //Check that the total calculated is correct
             decimal priceAfterDiscount = priceBeforeDiscount - discount;
@@ -85,6 +84,17 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             decimal totalAmt = priceAfterDiscount + shipCost;
             string total = driver.FindElement(By.XPath("/html//article[@id='post-5']//div[@class='cart-collaterals']/div/table[@class='shop_table shop_table_responsive']//strong/span")).Text;
 
+            try
+            {
+                Assert.That(totalAmt.ToString("0.00"),Is.EqualTo(total.Remove(0, 1)), "They are not equal");
+            }
+            catch (AssertionException)
+            {
+                TakeScreenShotElement(driver, "Cart Total", By.ClassName("order-total"));
+                Console.WriteLine("The total amount is incorrect");
+            }
+
+            /*
             if (totalAmt.ToString("0.00").Equals(total.Remove(0, 1)))
             {
                 Console.WriteLine("The total amount is correct");
@@ -94,6 +104,7 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
                 Console.WriteLine("The total amount is incorrect");
                 TakeScreenShotElement(driver, "Cart Total", By.ClassName("order-total"));
             }
+            */
 
             //proceed to checkout and completing billing details
             //driver.FindElement(By.PartialLinkText("Proceed to checkout")).Click();
