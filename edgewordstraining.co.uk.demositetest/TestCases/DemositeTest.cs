@@ -121,11 +121,22 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             TakeScreenShotElement(driver, "Order Number", By.XPath("/html//article[@id='post-6']//ul/li[1]"));
 
             //Check my orders
-            driver.FindElement(By.LinkText("My account")).Click();
-            driver.FindElement(By.LinkText("Orders")).Click();
-            string orderNumber = driver.FindElement(By.CssSelector("tr:nth-of-type(1) > .woocommerce-orders-table__cell.woocommerce-orders-table__cell-order-number")).Text;
-            Assert.That(string.IsNullOrEmpty(orderNumber), Is.False, "Order number is Displayed!");
-            Console.WriteLine(orderNumber);
+            MyOrders_POM orders = new MyOrders_POM(driver);
+            orders.GoToMyOrders();
+            try
+            {
+                orders.CheckOrderNumber();
+            }
+            catch (AssertionException)
+            {
+                TakeScreenShotElement(driver, "MyOrders", By.Id("post-7"));
+                Console.WriteLine("Recent Order was not Placed");
+            }
+
+            //Log out of the Account
+            LogOut_POM logout = new LogOut_POM(driver);
+            logout.LogOut();
+            Console.WriteLine("You are Logged Out!");
         }
     }
 }
