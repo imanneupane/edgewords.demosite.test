@@ -14,10 +14,11 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
 {
     public class Tests : Utils.BaseClass
     {
-        
+
         [Test, Order(1)]
         public void DemoTest()
         {
+            //Scroll page
             driver.Url = baseUrl;
             //Go to login page
             HomePage_POM home = new HomePage_POM(driver);
@@ -35,91 +36,96 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             AddItem_POM additem = new AddItem_POM(driver);
             additem.GoToShop().SelectProduct().AddItem();
             //additem.AddItemToCart();
-      
+
             //view cart and apply coupon
-            ApplyCoupon_POM applycoupon = new ApplyCoupon_POM(driver);
+            Coupon_POM applycoupon = new Coupon_POM(driver);
             applycoupon.ViewCart();
             applycoupon.CouponCode("edgewords");
             applycoupon.ApplyCouponButton();
             TakeScreenShot(driver, "couponapplied");
-            
+
             //Check that the coupon takes off 15%
-            string subtotal = driver.FindElement(By.XPath("/html//article[@id='post-5']/div[@class='entry-content']/div[@class='woocommerce']//table[@class='shop_table shop_table_responsive']//tr[@class='cart-subtotal']/td/span")).Text;
-            decimal priceBeforeDiscount = Convert.ToDecimal(subtotal.Remove(0,1));
-            decimal discount = (15m/100m) * priceBeforeDiscount;
-
-            IJavaScriptExecutor scroll = (IJavaScriptExecutor)driver;
-            _ = scroll.ExecuteScript("window.scrollTo(0,8)");
-
-            //Thread.Sleep(1000);
+            //Thread.Sleep(1000);     
             WaitHelper(driver, 20, By.CssSelector(".cart-discount.coupon-edgewords > td > .amount.woocommerce-Price-amount"));
-            string couponDiscount = driver.FindElement(By.CssSelector(".cart-discount.coupon-edgewords > td > .amount.woocommerce-Price-amount")).Text;
-            
             try
             {
-                Assert.That(discount.ToString("0.00"), Is.EqualTo(couponDiscount.Remove(0, 1)), "They are not equal");
+                applycoupon.CheckCoupon();
+                //Assert.That(discount.ToString("0.00"), Is.EqualTo(couponDiscount.Remove(0, 1)), "They are not equal");
             }
             catch (AssertionException)
             {
                 TakeScreenShotElement(driver, "CouponDiscount", By.ClassName("cart_totals"));
                 Console.WriteLine("Coupon does not take 15% off");
             }
-            
-            /*
-            if (discount.ToString("0.00").Equals(couponDiscount.Remove(0,1)))
-            {
-                Console.WriteLine("Coupon takes 15% off");
-            }
-            else
-            {
-                Console.WriteLine("Coupon does not take 15% off");
-                TakeScreenShotElement(driver, "CouponDiscount", By.ClassName("cart_totals"));
-            }
-            */
 
             //Check that the total calculated is correct
-            decimal priceAfterDiscount = priceBeforeDiscount - discount;
-            string shipping = driver.FindElement(By.XPath("/html//article[@id='post-5']//div[@class='cart-collaterals']/div/table[@class='shop_table shop_table_responsive']//tr[@class='shipping']/td/span")).Text;
-            decimal shipCost = Convert.ToDecimal(shipping.Remove(0,1));
-            decimal totalAmt = priceAfterDiscount + shipCost;
-            string total = driver.FindElement(By.XPath("/html//article[@id='post-5']//div[@class='cart-collaterals']/div/table[@class='shop_table shop_table_responsive']//strong/span")).Text;
-
             try
             {
-                Assert.That(totalAmt.ToString("0.00"),Is.EqualTo(total.Remove(0, 1)), "They are not equal");
+                applycoupon.CheckTotal();
+                //Assert.That(totalAmt.ToString("0.00"),Is.EqualTo(total.Remove(0, 1)), "They are not equal");
             }
             catch (AssertionException)
             {
+                //Thread.Sleep(1000);
                 TakeScreenShotElement(driver, "Cart Total", By.ClassName("order-total"));
                 Console.WriteLine("The total amount is incorrect");
             }
-
-            /*
-            if (totalAmt.ToString("0.00").Equals(total.Remove(0, 1)))
-            {
-                Console.WriteLine("The total amount is correct");
-            }
-            else
-            {
-                Console.WriteLine("The total amount is incorrect");
-                TakeScreenShotElement(driver, "Cart Total", By.ClassName("order-total"));
-            }
-            */
 
             //proceed to checkout and completing billing details
-            //driver.FindElement(By.PartialLinkText("Proceed to checkout")).Click();
-            //driver.FindElement(By.Id("")).SendKeys("");
-            
-            System.Console.WriteLine("Result: " + shipping);
-            
+            WaitHelper(driver, 20, By.PartialLinkText("Proceed to checkout"));
+            //Thread.Sleep(3000);
+            driver.FindElement(By.PartialLinkText("Proceed to checkout")).Click();
+            Console.WriteLine("You are in Checkout");
+
+            //Completing Billing Details
+            BillingDetail_POM billsDetail = new BillingDetail_POM(driver);
+            billsDetail.BillingForm("Nami", "Rai", "nFocus", "United Kingdom", "101 Star Road", "Ashford", "Kent", "TN3 5JB", "021540231", "namirai@yahoo.com");
+            WaitHelper(driver, 20, By.Id("place_order"));
+            //Thread.Sleep(1000);
+            billsDetail.PlaceOrder();
+
+            Console.WriteLine("You are in Billing Details");
         }
 
-        [Test, Order(2)]
-        public void AddItemTest()
+
+
+        [Test]
+        public void Billing()
         {
-            driver.Url = baseUrl;
-           
-        }
+            driver.Url = "https://www.edgewordstraining.co.uk/demo-site/";
+            //Login to your account
+            driver.FindElement(By.LinkText("My account")).Click();
+            driver.FindElement(By.LinkText("Dismiss")).Click();
+            LoginPage_POM login = new LoginPage_POM(driver);
+            WaitHelper(driver, 10, By.Name("login"));
+            login.LoginExpected("imanneupane@yahoo.com", "Neupane@12345");
+            System.Console.WriteLine("You are now Logged in!");
 
+            driver.FindElement(By.LinkText("Shop")).Click();
+            driver.FindElement(By.XPath("//main[@id='main']/ul//a[@href='https://www.edgewordstraining.co.uk/demo-site/product/cap/']/img")).Click();
+            driver.FindElement(By.XPath("//main[@id='main']//form[@action='https://www.edgewordstraining.co.uk/demo-site/product/cap/']/button[@name='add-to-cart']")).Click();
+            driver.FindElement(By.CssSelector("div[role='alert'] > .button.wc-forward")).Click();
+
+            driver.FindElement(By.Name("coupon_code")).SendKeys("edgewords");
+            driver.FindElement(By.Name("apply_coupon")).Click();
+            BillingDetail_POM billsDetail = new BillingDetail_POM(driver);
+            driver.FindElement(By.PartialLinkText("Proceed")).Click();
+            billsDetail.BillingForm("Nami", "Rai", "nFocus", "United Kingdom", "101 Star Road", "Ashford", "Kent", "TN3 5JB", "021540231", "namirai@yahoo.com");
+            //WaitHelper(driver, 10, By.Id("place_order"));
+            Thread.Sleep(1000);
+            billsDetail.PlaceOrder();
+
+            //Capturing the order number
+            Thread.Sleep(1000);
+            //WaitHelper(driver, 10, By.XPath("/html//article[@id='post-6']//ul/li[1]"));
+            TakeScreenShotElement(driver, "Order Number", By.XPath("/html//article[@id='post-6']//ul/li[1]"));
+
+            //Check my orders
+            driver.FindElement(By.LinkText("My account")).Click();
+            driver.FindElement(By.LinkText("Orders")).Click();
+            string orderNumber = driver.FindElement(By.CssSelector("tr:nth-of-type(1) > .woocommerce-orders-table__cell.woocommerce-orders-table__cell-order-number")).Text;
+            Assert.That(string.IsNullOrEmpty(orderNumber), Is.False, "Order number is Displayed!");
+            Console.WriteLine(orderNumber);
+        }
     }
 }

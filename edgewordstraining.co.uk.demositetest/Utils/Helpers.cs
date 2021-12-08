@@ -13,6 +13,7 @@ namespace edgewordstraining.co.uk.demositetest.Utils
         public static void WaitHelper(IWebDriver driver, int seconds, By locator)
         {
             WebDriverWait wait = new WebDriverWait(driver, System.TimeSpan.FromSeconds(seconds));
+            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
             wait.Until(drv => drv.FindElement(locator).Displayed);
         }
 
