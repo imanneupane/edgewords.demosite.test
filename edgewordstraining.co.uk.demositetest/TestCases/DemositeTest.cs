@@ -73,7 +73,7 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
 
             //proceed to checkout and completing billing details
             WaitHelper(driver, 10, By.PartialLinkText("Proceed to checkout"));
-            //Thread.Sleep(3000);
+            Thread.Sleep(3000);
             driver.FindElement(By.PartialLinkText("Proceed to checkout")).Click();
             Console.WriteLine("You are in Checkout");
 
@@ -98,7 +98,7 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             //Thread.Sleep(1000);
             TakeScreenShotElement(driver, "Order Number", By.XPath("/html//article[@id='post-6']//ul/li[1]"));
 
-            //Check my orders
+            //Check my order is placed
             MyOrders_POM orders = new MyOrders_POM(driver);
             orders.GoToMyOrders();
             try
