@@ -72,23 +72,53 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             }
 
             //proceed to checkout and completing billing details
-            WaitHelper(driver, 20, By.PartialLinkText("Proceed to checkout"));
+            WaitHelper(driver, 10, By.PartialLinkText("Proceed to checkout"));
             //Thread.Sleep(3000);
             driver.FindElement(By.PartialLinkText("Proceed to checkout")).Click();
             Console.WriteLine("You are in Checkout");
 
+            WaitHelper(driver, 10, By.PartialLinkText("Click here to enter your code"));
+
             //Completing Billing Details
             BillingDetail_POM billsDetail = new BillingDetail_POM(driver);
             billsDetail.BillingForm("Nami", "Rai", "nFocus", "United Kingdom", "101 Star Road", "Ashford", "Kent", "TN3 5JB", "021540231", "namirai@yahoo.com");
-            WaitHelper(driver, 20, By.Id("place_order"));
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
             billsDetail.PlaceOrder();
-
+            try
+            {
+                WaitHelper(driver, 20, By.XPath("//*[text()='Order received']"));
+            }
+            catch (StaleElementReferenceException)
+            {
+                Console.WriteLine("Not in the right page");
+            }
+            
             Console.WriteLine("You are in Billing Details");
+
+            //Thread.Sleep(1000);
+            TakeScreenShotElement(driver, "Order Number", By.XPath("/html//article[@id='post-6']//ul/li[1]"));
+
+            //Check my orders
+            MyOrders_POM orders = new MyOrders_POM(driver);
+            orders.GoToMyOrders();
+            try
+            {
+                orders.CheckOrderNumber();
+            }
+            catch (AssertionException)
+            {
+                TakeScreenShotElement(driver, "MyOrders", By.Id("post-7"));
+                Console.WriteLine("Recent Order was not Placed");
+            }
+
+            //Log out of the Account
+            LogOut_POM logout = new LogOut_POM(driver);
+            logout.LogOut();
+            Console.WriteLine("You are Logged Out!");
         }
 
 
-
+        /*
         [Test]
         public void Billing()
         {
@@ -138,5 +168,6 @@ namespace edgewordstraining.co.uk.demositetest.TestCases
             logout.LogOut();
             Console.WriteLine("You are Logged Out!");
         }
+        */
     }
 }

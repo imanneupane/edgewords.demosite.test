@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace edgewordstraining.co.uk.demositetest.POM_Pages
 {
@@ -18,6 +19,7 @@ namespace edgewordstraining.co.uk.demositetest.POM_Pages
         IWebElement UsernameField => driver.FindElement(By.Id("username"));
         IWebElement PasswordField => driver.FindElement(By.Id("password"));
         IWebElement LoginButton => driver.FindElement(By.Name("login"));
+        IWebElement Logout => driver.FindElement(By.LinkText(""));
 
         //Service methods
 
@@ -41,6 +43,7 @@ namespace edgewordstraining.co.uk.demositetest.POM_Pages
             Username(sUsername);
             Password(sPassword);
             LoginSubmit();
+            //Assert.That();
         }
     }
 }

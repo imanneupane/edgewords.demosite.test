@@ -19,15 +19,14 @@ namespace edgewordstraining.co.uk.demositetest.Utils
         public void Setup()
         {
             driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
             //driver = new EdgeDriver();
-          
+            driver.Manage().Window.Maximize();
         }
 
         [TearDown]
         public void TearDown()
         {
-            //driver.Quit();
+            driver.Quit();
         }
     }
 }

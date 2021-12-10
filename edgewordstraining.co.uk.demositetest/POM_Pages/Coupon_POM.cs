@@ -48,7 +48,7 @@ namespace edgewordstraining.co.uk.demositetest.POM_Pages
             string couponDiscount = CartDiscount.Text;
             priceBeforeDiscount = Convert.ToDecimal(subtotal.Remove(0, 1));
             discount = (15m / 100m) * priceBeforeDiscount;
-            Assert.That(discount.ToString("0.00"), Is.EqualTo(couponDiscount.Remove(0, 1)), "They are not equal");
+            Assert.That(couponDiscount.Remove(0, 1), Is.EqualTo(discount.ToString("0.00")), "They are not equal");
         }
 
         public void CheckTotal()
@@ -57,7 +57,7 @@ namespace edgewordstraining.co.uk.demositetest.POM_Pages
             priceAfterDiscount = priceBeforeDiscount - discount;
             shipCost = Convert.ToDecimal(shipping.Remove(0, 1));
             totalAmt = priceAfterDiscount + shipCost;
-            Assert.That(totalAmt.ToString("0.00"), Is.EqualTo(Total.Text.Remove(0, 1)), "They are not equal");
+            Assert.That(Total.Text.Remove(0, 1), Is.EqualTo(totalAmt.ToString("0.00")), "They are not equal");
         }
     }
 }
